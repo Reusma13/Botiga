@@ -15,7 +15,16 @@ namespace Botiga_I_Cistella_OscarReusMartinez_MarcVancea
             productesCistella = new string[10];
             quantitat = new int[10];
             nElemCistella = 0;
-            diners = 100.0m;
+            diners = 50.50m;
+
+            if (ComprarProducte("Poma", 2))
+            {
+                Console.WriteLine("Compra exitosa!");
+            }
+            else
+            {
+                Console.WriteLine("No tens suficients diners per aquesta compra.");
+            }
 
             OrdenarCistella();
 
@@ -23,7 +32,7 @@ namespace Botiga_I_Cistella_OscarReusMartinez_MarcVancea
         }
         static bool ComprarProducte(string producte, int quantitat, double preu)
         {
-            // Comprova si el producte existeix a la botiga
+            // Comprova si el producte existeix a la nostra botiga
             if (!ExisteixProducte(producte))
             {
                 Console.WriteLine("El producte no existeix a la botiga.");
@@ -31,7 +40,7 @@ namespace Botiga_I_Cistella_OscarReusMartinez_MarcVancea
             }
 
             // Obté el preu del producte
-            decimal preu = ObtenirPreu(producte);
+            double preu = ObtenirPreu(producte);
 
             // Comprova si hi ha suficient espai a la cistella
             if (nElemCistella + quantitat > productesCistella.Length)
@@ -40,7 +49,7 @@ namespace Botiga_I_Cistella_OscarReusMartinez_MarcVancea
                 return false;
             }
 
-            // Comprova si tens suficients diners
+            // Comprova si tenim suficients diners
             if (diners < preu * quantitat)
             {
                 Console.WriteLine("No tens suficients diners per a aquesta compra. Considera ingressar més diners.");
@@ -70,7 +79,7 @@ namespace Botiga_I_Cistella_OscarReusMartinez_MarcVancea
             }
             return false;
         }
-        static decimal ObtenirPreu(string producte)
+        static double ObtenirPreu(string producte)
         {
             for (int i = 0; i < productesBotiga.Length; i++)
             {
@@ -82,8 +91,27 @@ namespace Botiga_I_Cistella_OscarReusMartinez_MarcVancea
             return -1;
         }
 
+        static void OrdenarCistella()
+        {
+            for (int i = 0; i < nElemCistella - 1; i++)
+            {
+                for (int j = 0; j < nElemCistella - i - 1; j++)
+                {
+                    if (productesCistella[j].CompareTo(productesCistella[j + 1]) > 0)
+                    {
+                        // Intercanviar productes
+                        string tempProducte = productesCistella[j];
+                        productesCistella[j] = productesCistella[j + 1];
+                        productesCistella[j + 1] = tempProducte;
 
-
+                        // Intercanviar quantitats
+                        int tempQuantitat = quantitat[j];
+                        quantitat[j] = quantitat[j + 1];
+                        quantitat[j + 1] = tempQuantitat;
+                    }
+                }
+            }
+        }
 
         static string Mostra()
         {
