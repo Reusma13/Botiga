@@ -1,4 +1,5 @@
-﻿using Internal;
+﻿using System;
+using Internal;
 
 namespace Botiga_I_Cistella_OscarReusMartinez_MarcVancea
 {
@@ -22,40 +23,68 @@ namespace Botiga_I_Cistella_OscarReusMartinez_MarcVancea
         }
         static bool ComprarProducte(string producte, int quantitat, double preu)
         {
-            if (nElemCistella < productesCistella.Length && diners >= preu * quantitat)
+            // Comprova si el producte existeix a la botiga
+            if (!ExisteixProducte(producte))
             {
-                productesCistella[nElemCistella] = producte;
-                Program.quantitat[nElemCistella] = quantitat;
-                diners -= preu * quantitat;
-                nElemCistella++;
-                return true;
-            }
-            else
-            {
+                Console.WriteLine("El producte no existeix a la botiga.");
                 return false;
             }
-        }
-        static void OrdenarCistella()
-        {
-            for (int i = 0; i < nElemCistella - 1; i++)
-            {
-                for (int j = 0; j < nElemCistella - i - 1; j++)
-                {
-                    if (productesCistella[j].CompareTo(productesCistella[j + 1]) > 0)
-                    {
-                        // Intercanviar productes
-                        string tempProducte = productesCistella[j];
-                        productesCistella[j] = productesCistella[j + 1];
-                        productesCistella[j + 1] = tempProducte;
 
-                        // Intercanviar quantitats
-                        int tempQuantitat = quantitat[j];
-                        quantitat[j] = quantitat[j + 1];
-                        quantitat[j + 1] = tempQuantitat;
-                    }
+            // Obté el preu del producte
+            decimal preu = ObtenirPreu(producte);
+
+            // Comprova si hi ha suficient espai a la cistella
+            if (nElemCistella + quantitat > productesCistella.Length)
+            {
+                Console.WriteLine("No hi ha suficient espai a la cistella. Considera ampliar la cistella.");
+                return false;
+            }
+
+            // Comprova si tens suficients diners
+            if (diners < preu * quantitat)
+            {
+                Console.WriteLine("No tens suficients diners per a aquesta compra. Considera ingressar més diners.");
+                return false;
+            }
+
+            // Afegeix el producte a la cistella
+            for (int i = 0; i < quantitat; i++)
+            {
+                productesCistella[nElemCistella] = producte;
+                nElemCistella++;
+            }
+
+            // Descompta els diners
+            diners -= preu * quantitat;
+
+            return true;
+        }
+        static bool ExisteixProducte(string producte)
+        {
+            for (int i = 0; i < productesBotiga.Length; i++)
+            {
+                if (productesBotiga[i] == producte)
+                {
+                    return true;
                 }
             }
+            return false;
         }
+        static decimal ObtenirPreu(string producte)
+        {
+            for (int i = 0; i < productesBotiga.Length; i++)
+            {
+                if (productesBotiga[i] == producte)
+                {
+                    return preusBotiga[i];
+                }
+            }
+            return -1;
+        }
+
+
+
+
         static string Mostra()
         {
             string tiquet = "";
