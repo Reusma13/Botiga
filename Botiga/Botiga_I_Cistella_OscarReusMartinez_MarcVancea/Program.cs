@@ -6,7 +6,9 @@ namespace Botiga_I_Cistella_OscarReusMartinez_MarcVancea
     {
         static void Main(string[] args)
         {
-            Console.Write("Ets amo o comprador?(1/2)");
+            Console.WriteLine("Selecciona una opcio: \n" +
+                          "     1. Amo \n" +
+                          "     2. Comprador");
             int opcio = Convert.ToInt32(Console.ReadLine());
             switch (opcio)
             {
@@ -23,8 +25,8 @@ namespace Botiga_I_Cistella_OscarReusMartinez_MarcVancea
         }
         static void Botiga()
         {
-            string[] productesBotiga = new string[5] { "Poma", "Pera", "Platan", "Arroz", "Verdura" };
-            double[] preuProductes = new double[5] { 1.4, 1.5, 3.4, 2.2, 5.3};
+            string[] productesBotiga = new string[6] { "Poma", "Pera", "Platan", "Arroz", "Verdura", "Llanta" };
+            double[] preuProductes = new double[6] { 1.4, 1.5, 3.4, 2.2, 5.3, 16.3};
             int nElemBotiga = 5;
             int opcio = 1;
             while (opcio != 0)
@@ -106,10 +108,12 @@ namespace Botiga_I_Cistella_OscarReusMartinez_MarcVancea
                         break;
                     case 8:
                         MostrarBotiga(productesBotiga, preuProductes, nElemBotiga);
+                        TornarMenu();
                         break;
-                    /*case 9:
+                    case 9:
                         BotigaToString(productesBotiga, preuProductes, nElemBotiga);
-                        break;*/
+                        TornarMenu();
+                        break;
                     default:
                         Console.WriteLine("Error. Valor incorrecte");
                         TornarMenu();
@@ -208,7 +212,6 @@ namespace Botiga_I_Cistella_OscarReusMartinez_MarcVancea
 
                     if (string.Compare(productes[i], productes[i + 1]) > 0)
                     {
-                        // intercambio arr[j+1] y arr[j]
                         string temp = productes[i];
                         productes[i] = productes[i + 1];
                         productes[i + 1] = temp;
@@ -241,18 +244,23 @@ namespace Botiga_I_Cistella_OscarReusMartinez_MarcVancea
             } while (i <= j);
             if (j > li) OrdenarPreus(productes, preus, li, j, nElem);
             if (i > ls) OrdenarPreus(productes, preus, i, ls, nElem);
-            for (int k = 0; k < nElem - 1; k++)
+            for (int k = 0; k < nElem; k++)
                 Console.WriteLine($"Producte: {productes[k]} Preu: {preus[k]}");
         }
         static void MostrarBotiga(string[] productes, double[] preus, int nElem)
         {
-            //Console.WriteLine(BotigaToString(productes, preus, nElem));
+            Console.WriteLine(BotigaToString(productes, preus, nElem));
         }
-        /*static string BotigaToString(string[] productes, double[] preus, int nElem)
+        static string BotigaToString(string[] productes, double[] preus, int nElem)
         {
-
-
-        }*/
+            string mostrar = "";
+            for (int i = 0; i < nElem; i++)
+            {
+                mostrar += $"Producte: {productes[i]}, el seu preu es de: {preus[i]}. Portem {i + 1} productes contats. \nEns falta per omplenar {productes.Length - 1 - i} en tota la taula. " +
+                    $"Contant nElements ens faltan {nElem - (i + 1)} \n";
+            }
+            return mostrar;
+        }
         static void TornarMenu()
         {
             int i = 5;
