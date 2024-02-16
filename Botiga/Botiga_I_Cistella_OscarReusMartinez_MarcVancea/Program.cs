@@ -30,7 +30,7 @@ namespace Botiga_I_Cistella_OscarReusMartinez_MarcVancea
 
             Console.WriteLine(MostraCistella());
         }
-        static bool ComprarProducte(string producte, int quantitat, double preu)
+        static bool ComprarProducte(string producte, int nElemCistella, string[] productesCistella, int[] quantitat, double diners)
         {
             
             if (!ExisteixProducte(producte))
@@ -91,7 +91,7 @@ namespace Botiga_I_Cistella_OscarReusMartinez_MarcVancea
             return -1;
         }
 
-        static void OrdenarCistella()
+        static void OrdenarCistella(int nElemCistella, string[] productesCistella, int[] quantitat, double diners)
         {
             for (int i = 0; i < nElemCistella - 1; i++)
             {
@@ -113,12 +113,12 @@ namespace Botiga_I_Cistella_OscarReusMartinez_MarcVancea
                 }
             }
         }
-        static void MostraCistella(string [] productesCistella,int[] quantitat, int[] nElemCistella, double[] diners )
+        static void MostraCistella(string [] productesCistella,int[] quantitat, int nElemCistella, double diners )
         {
             Console.WriteLine(CistellaToString(productesCistella, quantitat, nElemCistella, diners));
         }
 
-        static string CistellaToString()
+        static string CistellaToString(int nElemCistella, string[] productesCistella, int[] quantitat, double diners)
         {
             string tiquet = "Tiquet de compra:\n";
             for (int i = 0; i < nElemCistella; i++)
