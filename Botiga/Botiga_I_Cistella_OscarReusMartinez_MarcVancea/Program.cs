@@ -113,16 +113,9 @@ namespace Botiga_I_Cistella_OscarReusMartinez_MarcVancea
                 }
             }
         }
-
-        static void MostraCistella()
+        static void MostraCistella(string [] productesCistella,int[] quantitat, int[] nElemCistella, double[] diners )
         {
-            Console.WriteLine("Tiquet de compra:");
-            for (int i = 0; i < nElemCistella; i++)
-            {
-                decimal preuUnitari = ObtenirPreu(productesCistella[i]);
-                Console.WriteLine("Producte: " + productesCistella[i] + ", Quantitat: " + quantitat[i] + ", Preu unitari: " + preuUnitari + ", Preu total: " + preuUnitari * quantitat[i]);
-            }
-            Console.WriteLine("Total a pagar: " + diners);
+            Console.WriteLine(CistellaToString(productesCistella, quantitat, nElemCistella, diners));
         }
 
         static string CistellaToString()
@@ -130,7 +123,7 @@ namespace Botiga_I_Cistella_OscarReusMartinez_MarcVancea
             string tiquet = "Tiquet de compra:\n";
             for (int i = 0; i < nElemCistella; i++)
             {
-                decimal preuUnitari = ObtenirPreu(productesCistella[i]);
+                double preuUnitari = ObtenirPreu(productesCistella[i]);
                 tiquet += "Producte: " + productesCistella[i] + ", Quantitat: " + quantitat[i] + ", Preu unitari: " + preuUnitari + ", Preu total: " + preuUnitari * quantitat[i] + "\n";
             }
             tiquet += "Total a pagar: " + diners;
