@@ -8,22 +8,31 @@ namespace Botiga_I_Cistella_OscarReusMartinez_MarcVancea
         {
             string[] productesBotiga = new string[6] { "Poma", "Pera", "Platan", "Arroz", "Verdura", "Llanta" };
             double[] preuProductes = new double[6] { 1.4, 1.5, 3.4, 2.2, 5.3, 16.3 };
-            Console.WriteLine("Selecciona una opcio: \n" +
-                          "     1. Amo \n" +
-                          "     2. Comprador");
-            int opcio = Convert.ToInt32(Console.ReadLine());
-            switch (opcio)
+            int opcio = 1;
+            while (opcio != 0)
             {
-                case 1:
-                    Botiga(productesBotiga, preuProductes);
-                    break;
-                case 2:
-                    Cistella(productesBotiga, preuProductes);
-                    break;
-                default:
-                    Console.WriteLine("Error. Opcio incorrecta");
-                    break;
+                Console.Clear();
+                Console.WriteLine("Selecciona una opcio: \n" +
+                          "     1. Amo \n" +
+                          "     2. Comprador \n" +
+                          "     0. Salir");
+                opcio = Convert.ToInt32(Console.ReadLine());
+                switch (opcio)
+                {
+                    case 0:
+                        break;
+                    case 1:
+                        Botiga(productesBotiga, preuProductes);
+                        break;
+                    case 2:
+                        Cistella(productesBotiga, preuProductes);
+                        break;
+                    default:
+                        Console.WriteLine("Error. Opcio incorrecta");
+                        break;
+                }
             }
+            
         }
         static void Botiga(string[] productesBotiga, double[] preuProductes)
         {
